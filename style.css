@@ -1,0 +1,65 @@
+@font-face {font-family: PublicPixel; src: url('./assets/PublicPixel.ttf'); } 
+
+img {
+    image-rendering: pixelated;
+}
+
+h1 {
+    font-family: PublicPixel;
+}
+
+.banner {
+    position: absolute; 
+    top:30%; 
+    left:50%; 
+    height: 40%; 
+    transform: translateX(-50%) translateY(-50%); 
+    aspect-ratio: 62/32;
+}
+
+.titlebutton {
+    position: absolute; 
+    top:70%; 
+    left:50%; 
+    transform: translateX(-50%) translateY(-50%); 
+    height:9%; 
+    border:0; 
+    border-radius: 10px;
+    aspect-ratio: 4/1;
+    font-size: 3vh;
+    background-color: rgba(0, 0, 0, .5);
+    color: white;
+    cursor:pointer;
+    font-family: PublicPixel;
+}
+
+.winmenu {
+    position: absolute; 
+    top:50%; 
+    left:50%; 
+    transform: translateX(-50%) translateY(-50%);
+    aspect-ratio: 4/5;
+    height: 80%;
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 50px;
+}
+
+.trophy {
+    position: absolute; 
+    top:40%; 
+    left:50%; 
+    transform: translateX(-50%) translateY(-50%);
+    width:50%;
+    aspect-ratio: 1/1;
+}
+
+.trophy-text {
+    color: white;
+    font-size: 3vh;
+    text-align: center;
+    position: absolute; 
+    top:70%; 
+    left:50%; 
+    transform: translateX(-50%) translateY(-50%);
+    width: 80%;
+}
