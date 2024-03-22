@@ -17,6 +17,15 @@ camera.position.set(0, 250, 0);
 var menu = 'main';
 
 
+window.addEventListener( 'resize', onWindowResize, false );
+
+function onWindowResize(){
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+}
+
+
 sun = new THREE.DirectionalLight( new THREE.Color(`rgb(255,255,255)`) );
 sun.position.set( 400, 400, 400 );
 soft = new THREE.DirectionalLight( new THREE.Color(`rgb(240,240,240)`) );
@@ -31,7 +40,7 @@ scene.add(neath);
 const planeGeometry = new THREE.PlaneGeometry(100, 100); // Adjust the size as needed
 
 const textureLoader = new THREE.TextureLoader();
-const texture = textureLoader.load(`https://raw.githubusercontent.com/Spiceinajar/space-climb/main/assets/tile.png`);
+const texture = textureLoader.load(`https://raw.githubusercontent.com/thecreatorgrey/space-climb-reborn/main/assets/tile.png`);
 texture.magFilter = THREE.NearestFilter;
 texture.minFilter = THREE.NearestFilter;
 texture.needsUpdate = true;
@@ -112,6 +121,9 @@ for (let step = 0; step < 5000; step++) {
     Block()
 }
 
+//titleMusic = new Audio("./assets/kick_shock.mp3");
+//titleMusic.play()
+
 const raycaster = new THREE.Raycaster();
 const direction = new THREE.Vector3();
 
@@ -124,6 +136,8 @@ function startGame() {
     document.getElementById('credsbtn').remove();
     document.getElementById('tutbtn').remove();
     document.getElementById('version-identifier').remove();
+
+    //titleMusic.pause()
     
     camera.fov = 90;
     //camera.position.set(0, 1.8, 0);
