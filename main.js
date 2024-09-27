@@ -1,12 +1,11 @@
 import * as THREE from 'three';
-import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
 
 const scene = new THREE.Scene();
 const clock = new THREE.Clock();
 const camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 const renderer = new THREE.WebGLRenderer({
-    antialias: false,
+    antialias: true,
     alpha: true,
 });
 
@@ -353,19 +352,33 @@ function startGame() {
     document.getElementById('credsbtn').remove();
     document.getElementById('tutbtn').remove();
     document.getElementById('version-identifier').remove();
-
-    //titleMusic.pause()
     
     camera.fov = 90;
-    //camera.position.set(0, 1.8, 0);
     stage = 'game';
-
-    const controls = new PointerLockControls(camera, renderer.domElement);
 
     renderer.domElement.requestPointerLock();
 
+
+    // Controls
+    const euler = new THREE.Euler( 0, 0, 0, 'YXZ' );
+    const cameraSensitivity = 2;
+    document.addEventListener('pointermove', (event) => {
+        // Proudly stolen from PointerLockControls
+        let changeX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+        let changeY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+
+        euler.setFromQuaternion( camera.quaternion );
+
+        euler.y -= changeX * 0.002 * cameraSensitivity;
+        euler.x -= changeY * 0.002 * cameraSensitivity;
+
+        euler.x = Math.max(-(Math.PI/2), Math.min(Math.PI/2, euler.x ) );
+
+        camera.quaternion.setFromEuler( euler );
+    })
+
     targetPos = new THREE.Vector3(0, 1.8, 0);
-    renderer.domElement.onclick = async function() {
+    document.addEventListener('pointerdown', () => {
         renderer.domElement.requestPointerLock();
 
         if (pointer.material.color.g === 1) {
@@ -373,9 +386,9 @@ function startGame() {
             targetPos.y = pointer.position.y + 1.8;
             targetPos.z = pointer.position.z;
         }
-    }
+    })
 
-    pressedKeys = {};
+    let pressedKeys = {};
     window.onkeyup = function(e) { pressedKeys[e.key] = false; }
     window.onkeydown = function(e) { pressedKeys[e.key] = true; }
 }

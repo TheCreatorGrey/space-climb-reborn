@@ -1,7 +1,7 @@
 @font-face {font-family: PublicPixel; src: url('./assets/PublicPixel.ttf'); } 
 
 body {
-    background-color: black;
+    background-color: rgb(0, 3, 44);
     overflow: hidden;
     font-family: PublicPixel;
     image-rendering: pixelated;
